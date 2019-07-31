@@ -31,13 +31,15 @@
 
 - (instancetype)initWithFrame:(CGRect)frame andBrickCell:(BrickCell *)brickCell andLineNumber:(NSInteger)line andParameterNumber:(NSInteger)parameter
 {
+    
     if(self = [super initWithFrame:frame]) {
         _brickCell = brickCell;
         _lineNumber = line;
         _parameterNumber = parameter;
         
+        // Options für den VariablenPicker
         NSMutableArray *options = [[NSMutableArray alloc] init];
-        [options addObject:kLocalizedNewElement];
+        [options addObject:@"Dafuq"];// kLocalizedNewElement];
         int currentOptionIndex = 0;
         if (!brickCell.isInserting) {
             int optionIndex = 1;
@@ -62,6 +64,7 @@
         [self setDelegate:(id<iOSComboboxDelegate>)self];
     }
     return self;
+     
 }
 
 - (void)comboboxDonePressed:(iOSCombobox *)combobox withValue:(NSString *)value
@@ -71,10 +74,39 @@
 
 - (void)comboboxOpened:(iOSCombobox *)combobox
 {
+    
+    if( [Util topmostViewController] != self.actionSheet){
+        self.actionSheet = [UIAlertController alertControllerWithTitle:@"Pick a variable" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [self resignFirstResponder];
+                                                            }];
+        [self.actionSheet addAction:cancelButton];
+        
+         for(NSString* buttonText in self.values) {
+         UIAlertAction* button = [UIAlertAction
+         actionWithTitle:buttonText
+         style:UIAlertActionStyleDefault
+         handler: ^(UIAlertAction * action) {
+             [self comboboxDonePressed: nil withValue:@"as"];
+         [self setCurrentImage:[self.images objectAtIndex:0]];
+         }];
+         
+         [self.actionSheet addAction:button];
+         }
+        
+        [[Util topmostViewController] presentViewController:self.actionSheet animated:YES completion:nil];
+    }
+    
+    
+    
     [self.brickCell.dataDelegate disableUserInteractionAndHighlight:self.brickCell withMarginBottom:kiOSComboboxTotalHeight];
     if (combobox.values.count == 1) {
         [self comboboxDonePressed: combobox withValue:combobox.values.firstObject];
     }
+     
 }
 
 # pragma mark - User interaction

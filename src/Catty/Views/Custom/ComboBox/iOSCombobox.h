@@ -47,6 +47,8 @@
 @property (readwrite, strong) UIView *inputView;
 @property (readwrite, strong) UIView *inputAccessoryView;
 
+@property (nonatomic, strong) UIAlertController* actionSheet;
+
 @end
 
 @protocol iOSComboboxDelegate <NSObject>

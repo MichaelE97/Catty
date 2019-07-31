@@ -47,8 +47,10 @@
 - (void)initialize {
     active = NO;
     self.backgroundColor = [UIColor clearColor];
+    /*
     CGFloat pickerY = [[UIScreen mainScreen] bounds].size.height - PICKER_VIEW_HEIGHT;
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    
     self.pickerView = [[iOSComboboxPickerView alloc] initWithFrame:CGRectMake(0.0f, pickerY, screenWidth, PICKER_VIEW_HEIGHT)];
     [self.pickerView setShowsSelectionIndicator:YES];
     [self.pickerView setDataSource:self];
@@ -58,6 +60,9 @@
     [self.keyboard setDelegate:self];
     
     self.inputView = self.pickerView;
+   
+     */
+    
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -88,6 +93,7 @@
  **  DRAWING
  **********************************************************/
 - (void)drawRect:(CGRect)rect {
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextClearRect(ctx, rect);
     CGColorSpaceRef baseSpace = CGColorSpaceCreateDeviceRGB();
@@ -238,6 +244,7 @@
                                       rect.size.width - ARROW_BOX_WIDTH - TEXT_LEFT-30,
                                       rect.size.height - BORDER_WIDTH)
             withAttributes:attributes];
+     
 }
 
 /***********************************************************
@@ -361,6 +368,7 @@
     
     if ([[self delegate] respondsToSelector:@selector(comboboxOpened:)])
     {
+        // ComoboxOpenend Check
         [[self delegate] comboboxOpened:self];
     }
     
