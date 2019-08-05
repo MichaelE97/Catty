@@ -39,7 +39,7 @@
         
         // Options für den VariablenPicker
         NSMutableArray *options = [[NSMutableArray alloc] init];
-        [options addObject:@"Dafuq"];// kLocalizedNewElement];
+        [options addObject:kLocalizedNewElement];
         int currentOptionIndex = 0;
         if (!brickCell.isInserting) {
             int optionIndex = 1;
@@ -74,7 +74,7 @@
 
 - (void)comboboxOpened:(iOSCombobox *)combobox
 {
-    
+    // Actionsheet Try
     if( [Util topmostViewController] != self.actionSheet){
         self.actionSheet = [UIAlertController alertControllerWithTitle:@"Pick a variable" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
         
@@ -84,17 +84,19 @@
                                                                  [self resignFirstResponder];
                                                             }];
         [self.actionSheet addAction:cancelButton];
+        int rowCnt = 0;
         
-         for(NSString* buttonText in self.values) {
-         UIAlertAction* button = [UIAlertAction
-         actionWithTitle:buttonText
-         style:UIAlertActionStyleDefault
-         handler: ^(UIAlertAction * action) {
-             [self comboboxDonePressed: nil withValue:@"as"];
-         [self setCurrentImage:[self.images objectAtIndex:0]];
-         }];
+        for(NSString* buttonText in self.values) {
+             UIAlertAction* button = [UIAlertAction
+             actionWithTitle:buttonText
+             style:UIAlertActionStyleDefault
+             handler: ^(UIAlertAction * action) {
+                 [self comboboxDonePressed: combobox withValue: buttonText];
+                 [self setCurrentImage:[self.images objectAtIndex:rowCnt]];
+             }];
          
-         [self.actionSheet addAction:button];
+            [self.actionSheet addAction:button];
+            rowCnt++;
          }
         
         [[Util topmostViewController] presentViewController:self.actionSheet animated:YES completion:nil];

@@ -30,7 +30,7 @@
 
 @protocol iOSComboboxDelegate;
 
-@interface iOSCombobox : UIControl <UIPickerViewDataSource, UIPickerViewDelegate, iOSComboboxPickerViewDelegate, BSKeyboardControlsDelegate>
+@interface iOSCombobox : UIControl </*UIPickerViewDataSource, UIPickerViewDelegate, iOSComboboxPickerViewDelegate,*/ BSKeyboardControlsDelegate>
 {
     BOOL active;
 }
@@ -58,3 +58,4 @@
 - (void)comboboxChanged:(iOSCombobox *)combobox toValue:(NSString*)toValue;
 - (void)comboboxDonePressed:(iOSCombobox *)combobox withValue:(NSString*)value;
 @end
+

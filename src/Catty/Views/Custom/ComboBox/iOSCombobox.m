@@ -72,7 +72,7 @@
     }
     return self;
 }
-
+/*
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
@@ -81,6 +81,7 @@
     return self;
 }
 
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -88,7 +89,7 @@
     }
     return self;
 }
-
+*/
 /***********************************************************
  **  DRAWING
  **********************************************************/
@@ -276,7 +277,7 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
-
+/*
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return [self.values count];
 }
@@ -286,6 +287,7 @@
 }
 
 - (UIView*) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+   
     UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Util screenWidth], 60)];
     CGFloat imageOffset = 0.0;
     CGFloat rowOffset = 30.0;
@@ -311,12 +313,15 @@
     [tmpView insertSubview:channelLabel atIndex:1];
     
     return tmpView;
+    
+    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, [Util screenWidth], 60)];
 }
-
+*/
 /***********************************************************
  **  UIPICKERVIEW DELEGATE COMMANDS
  **********************************************************/
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    /*
     [self setCurrentValue:[self.values objectAtIndex:row]];
     if (row > 0) {
         [self setCurrentImage:[self.images objectAtIndex:row-1]];
@@ -325,11 +330,13 @@
     }
     
     [self setNeedsDisplay];
+     */
     
     if ([self.delegate respondsToSelector:@selector(comboboxChanged:toValue:)])
     {
         [self.delegate comboboxChanged:self toValue:[self.values objectAtIndex:row]];
     }
+     
 }
 
 - (void)pickerViewClosed:(UIPickerView *)pickerView {
@@ -383,7 +390,7 @@
     
     return YES;
 }
-
+/*
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     if ([[self delegate] respondsToSelector:@selector(comboboxDonePressed:withValue:)])
     {
@@ -392,6 +399,7 @@
     [[keyboardControls activeField] resignFirstResponder];
     [self resignFirstResponder];
 }
+ */
 
 -(void)addLookData {
     self.images = [[NSMutableArray alloc] initWithCapacity:self.object.lookList.count];
