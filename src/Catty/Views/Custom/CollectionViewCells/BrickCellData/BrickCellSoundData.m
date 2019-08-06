@@ -71,7 +71,42 @@
 
 - (void)comboboxOpened:(iOSCombobox *)combobox
 {
+    /*
     [self.brickCell.dataDelegate disableUserInteractionAndHighlight:self.brickCell withMarginBottom:kiOSComboboxTotalHeight];
+     */
+    if( [Util topmostViewController] != self.actionSheet){
+        self.actionSheet = [UIAlertController alertControllerWithTitle:@"Pick a variable" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction* cancelButton = [UIAlertAction actionWithTitle:@"Cancel"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * action) {
+                                                                 [self resignFirstResponder];
+                                                             }];
+        [self.actionSheet addAction:cancelButton];
+        int rowCnt = 0;
+        
+        for(NSString* buttonText in self.values) {
+            UIAlertAction* button = [UIAlertAction
+                                     actionWithTitle:buttonText
+                                     style:UIAlertActionStyleDefault
+                                     handler: ^(UIAlertAction * action) {
+                                         [self comboboxDonePressed: combobox withValue: buttonText];
+                                         [self setCurrentImage:[self.images objectAtIndex:rowCnt]];
+                                     }];
+            
+            [self.actionSheet addAction:button];
+            rowCnt++;
+        }
+        
+        [[Util topmostViewController] presentViewController:self.actionSheet animated:YES completion:nil];
+    }
+    
+    
+    
+    [self.brickCell.dataDelegate disableUserInteractionAndHighlight:self.brickCell withMarginBottom:kiOSComboboxTotalHeight];
+    if (combobox.values.count == 1) {
+        [self comboboxDonePressed: combobox withValue:combobox.values.firstObject];
+    }
 }
 
 # pragma mark - User interaction

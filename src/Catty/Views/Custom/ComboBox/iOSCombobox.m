@@ -129,6 +129,7 @@
 
     CGContextRestoreGState(ctx);
     
+    
     // ===========================
     // Border around the combobox
     // ===========================
@@ -145,6 +146,7 @@
     CGContextDrawPath(ctx, kCGPathStroke);
     CGContextRestoreGState(ctx);
     
+     
     // ============================
     // Line separating arrow / text
     // ============================
@@ -338,23 +340,20 @@
     }
      
 }
-
+/*
 - (void)pickerViewClosed:(UIPickerView *)pickerView {
     if ([[self delegate] respondsToSelector:@selector(comboboxClosed:withValue:)])
     {
         [[self delegate] comboboxClosed:self withValue:[self currentValue]];
     }
 }
-
+*/
 /***********************************************************
  **  FIRST RESPONDER AND USER INTERFACE
  **********************************************************/
+
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [super beginTrackingWithTouch:touch withEvent:event];
-    if (self.currentImage) {
-        [self addLookData];
-    }
-
     [self becomeFirstResponder];
     return NO;
 }
@@ -390,6 +389,7 @@
     
     return YES;
 }
+
 /*
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls {
     if ([[self delegate] respondsToSelector:@selector(comboboxDonePressed:withValue:)])
@@ -400,7 +400,7 @@
     [self resignFirstResponder];
 }
  */
-
+/*
 -(void)addLookData {
     self.images = [[NSMutableArray alloc] initWithCapacity:self.object.lookList.count];
     NSInteger count = 0;
@@ -427,5 +427,5 @@
         count++;
     }
 }
-
+*/
 @end
